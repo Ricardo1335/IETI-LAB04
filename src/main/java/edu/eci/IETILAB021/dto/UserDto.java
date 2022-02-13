@@ -6,7 +6,11 @@ public class UserDto {
     public String email;
     
     public String lastname;
+    public String password;
 
+    public String getPassword(){
+        return password;
+    }
 
 
 }

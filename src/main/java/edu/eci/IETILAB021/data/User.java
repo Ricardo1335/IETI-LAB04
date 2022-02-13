@@ -4,13 +4,19 @@ package edu.eci.IETILAB021.data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import edu.eci.IETILAB021.dto.*;
+
 import lombok.Getter;
 
 import java.time.LocalDate;
-@Getter
+import java.util.List;
+
 @Document
 public class User
 {
+    private String passwordHash;
+    private List<RoleEnum> roles;
     @Id
     public
     String id;
@@ -24,8 +30,9 @@ public class User
 
     public LocalDate createdAt;
 
-    public User()
+    public User(UserDto userDto)
     {
+        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt());
     }
     public String getEmail (){
         return email;
@@ -34,6 +41,12 @@ public class User
     public String getName (){
         return name;
         
+    }
+    public String getPasswordHash(){
+        return passwordHash;
+    }
+    public List<RoleEnum> getRoles(){
+        return roles;
     }
     public String getLastName (){
         return lastName;

@@ -52,7 +52,7 @@ public class UserController {
     
      @PostMapping
      public ResponseEntity<User> create( @RequestBody UserDto userDto ) {
-          User user = new User();
+          User user = new User(userDto);
           user.setId((Integer.toString((int) counter.incrementAndGet())));
           user.setName(userDto.name);
           user.setLastname(userDto.lastname);
