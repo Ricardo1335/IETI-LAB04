@@ -39,7 +39,7 @@ public class User
         this.lastName = userDto.lastname;
         this.createdAt = LocalDate.now();
         this.roles = new ArrayList<>() ;
-        if (userDto.getRole() == 0){}
+        if (userDto.getRole() == 0){
             roles.add(RoleEnum.ADMIN);
         }else{
             roles.add(RoleEnum.USER);
