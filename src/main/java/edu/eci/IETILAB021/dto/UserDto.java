@@ -8,11 +8,20 @@ public class UserDto {
     public String lastname;
     public String password;
     private String id;
+    private int role;
 
 
 
     public String getId() {
         return id;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public void setId(String id) {

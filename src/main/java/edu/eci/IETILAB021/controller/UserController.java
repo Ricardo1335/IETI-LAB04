@@ -40,6 +40,7 @@ public class UserController {
 
 
      @GetMapping
+     @RolesAllowed("ADMIN")
      public ResponseEntity<List<User>> getAll() {
          
           return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
@@ -53,6 +54,7 @@ public class UserController {
     
     
      @PostMapping
+     @RolesAllowed("ADMIN")
      public ResponseEntity<User> create( @RequestBody UserDto userDto ) {
           User user = new User(userDto);
 
@@ -60,6 +62,7 @@ public class UserController {
      }
     
      @PutMapping( "/{id}" )
+     @RolesAllowed("ADMIN")
      public ResponseEntity<User> update( @RequestBody UserDto userDto, @PathVariable String id ) {
           User user = userService.findById(id);
           user.setEmail(userDto.email);

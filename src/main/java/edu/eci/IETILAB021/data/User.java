@@ -10,6 +10,7 @@ import edu.eci.IETILAB021.dto.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -37,6 +38,12 @@ public class User
         this.email = userDto.email;
         this.lastName = userDto.lastname;
         this.createdAt = LocalDate.now();
+        this.roles = new ArrayList<>() ;
+        if (userDto.getRole() == 0){}
+            roles.add(RoleEnum.ADMIN);
+        }else{
+            roles.add(RoleEnum.USER);
+        }
     }
     public String getEmail (){
         return email;
