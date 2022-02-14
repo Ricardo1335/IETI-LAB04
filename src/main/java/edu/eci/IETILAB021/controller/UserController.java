@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,11 +55,7 @@ public class UserController {
      @PostMapping
      public ResponseEntity<User> create( @RequestBody UserDto userDto ) {
           User user = new User(userDto);
-          user.setId((Integer.toString((int) counter.incrementAndGet())));
-          user.setName(userDto.name);
-          user.setLastname(userDto.lastname);
-          user.setEmail(userDto.email);
-          user.setdate(LocalDate.now());
+
           return new ResponseEntity<>(userService.create(user), HttpStatus.OK);
      }
     
@@ -71,6 +69,7 @@ public class UserController {
      }
 
      @DeleteMapping( "/{id}" )
+     @RolesAllowed("ADMIN")
      public ResponseEntity<Boolean> delete( @PathVariable String id ) {
           userService.deleteById(id);
           return new ResponseEntity<>(true, HttpStatus.OK);      

@@ -33,6 +33,10 @@ public class User
     public User(UserDto userDto)
     {
         this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt());
+        this.name = userDto.name;
+        this.email = userDto.email;
+        this.lastName = userDto.lastname;
+        this.createdAt = LocalDate.now();
     }
     public String getEmail (){
         return email;

@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 
 import edu.eci.IETILAB021.data.User;
+import edu.eci.IETILAB021.dto.UserDto;
 
 public class UserServiceHashMap implements UserService {
     HashMap <String, User> map = new HashMap <String, User> ();
@@ -50,6 +51,18 @@ public class UserServiceHashMap implements UserService {
 
     @Override
     public List<User> findUsersCreatedAfter(Date startDate) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public User update(UserDto userDto) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public User findByEmail(String email) {
         // TODO Auto-generated method stub
         return null;
     }

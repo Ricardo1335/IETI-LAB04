@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.eci.IETILAB021.data.User;
-
+import edu.eci.IETILAB021.dto.UserDto;
 import edu.eci.IETILAB021.service.UserService;
 @Service
 public class UserServiceMongoDB
@@ -59,6 +59,18 @@ public class UserServiceMongoDB
         return null; 
     }
     @Override
+    public User update(UserDto userDto) {
+        if(userRepository.existsById(userDto.getId())) {
+            User actualUser = userRepository.findById(userDto.getId()).get();
+            actualUser.setEmail(userDto.getEmail());
+            actualUser.setName(userDto.getName());
+            actualUser.setLastname(userDto.getLastName());
+            userRepository.save(actualUser);
+            return actualUser;
+        }
+        return null;
+    }
+    @Override
     public List<User> findUsersWithNameOrLastNameLike(String queryText) {
         List<User> users = new ArrayList<>(); 
         users.addAll(userRepository.findBylastName(queryText)); 
@@ -69,5 +81,10 @@ public class UserServiceMongoDB
     @Override
     public List<User> findUsersCreatedAfter(Date startDate) {
         return userRepository.findBycreatedAtAfter(startDate) ; 
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
    }
